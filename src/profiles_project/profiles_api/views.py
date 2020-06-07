@@ -140,7 +140,7 @@ class LoginViewSet(viewsets.ViewSet):
 
         return ObtainAuthToken().post(request)
 
-'''class UserProfileFeedViewSet(viewsets.ModelViewSet):
+class UserProfileFeedViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
     authentication_classes = (TokenAuthentication,)
@@ -152,4 +152,3 @@ class LoginViewSet(viewsets.ViewSet):
         """Sets the user profile to the logged in user."""
 
         serializer.save(user_profile = self.request.user)
-'''
