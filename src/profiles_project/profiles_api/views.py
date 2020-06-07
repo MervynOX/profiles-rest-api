@@ -17,7 +17,7 @@ from rest_framework.permissions import IsAuthenticated              # only allow
 
 from . import serializers
 from . import models
-#from . import permissions
+from . import permissions
 
 # the application logic behind our API
 class HelloApiView(APIView):
@@ -125,11 +125,11 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,) # having coma to ensure that it is a tuple
-#    permission_classes = (permissions.UpdateOwnProfile,) # add multi auth classes to a particular viewset
+    permission_classes = (permissions.UpdateOwnProfile,) # add multi auth classes to a particular viewset
     filter_backends = (filters.SearchFilter,) # allow user to use the search filter backend
     search_fields = ('name', 'email',) # by using the name and email to filter
 
-'''class LoginViewSet(viewsets.ViewSet):
+class LoginViewSet(viewsets.ViewSet):
     """Check email and password and return an auth token."""
 
     serializer_class = AuthTokenSerializer
@@ -140,7 +140,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
         return ObtainAuthToken().post(request)
 
-class UserProfileFeedViewSet(viewsets.ModelViewSet):
+'''class UserProfileFeedViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
     authentication_classes = (TokenAuthentication,)
