@@ -19,7 +19,7 @@ Connect to the VM env
 vagrant ssh
 ```
 
-## On the VM environment for the **FIRST** time
+## On the VM environment for the FIRST time
 #### Create a Python Virtual environment
 
 ```bash
@@ -31,7 +31,7 @@ mkvirtualenv profiles-api --python==python3
 ```bash
 workon profiles-api
 pip install django==1.11
-pip install djangorestframework=3.6.2
+pip install djangorestframework==3.6.2
 ```
 
 ## Create Migration and Sync Database
