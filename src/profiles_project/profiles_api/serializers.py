@@ -5,7 +5,7 @@ from . import models
 class HelloSerializer(serializers.Serializer):
     """Serializes a name field for testing our APIView."""
 
-    name = serializers.CharField(max_length=50) #logic will be automatically provided, therefore error handling not needed
+    first_name = serializers.CharField(max_length=50) #logic will be automatically provided, therefore error handling not needed
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserProfile # tell django what model we are using
-        fields = ('id', 'email', 'name', 'password') # what field in the model that we want to use in the serializer
+        fields = ('id', 'email', 'first_name', 'last_name', 'password') # what field in the model that we want to use in the serializer
         extra_kwargs = {'password': {'write_only': True}} # special attri that we want to apply.... e.g. pw is WRITE only for security
 
     # assign pw properly to the user
@@ -22,7 +22,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         user = models.UserProfile(
             email = validated_data['email'],
-            name = validated_data['name']
+            first_name = validated_data['first_name'],
+            last_name = validated_data['last_name']
         )
 
         user.set_password(validated_data['password'])

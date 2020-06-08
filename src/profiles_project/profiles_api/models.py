@@ -6,7 +6,7 @@ from django.contrib.auth.models import BaseUserManager
 class UserProfileManager(BaseUserManager):
     """Helps Django work with our custom user model"""
 
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, first_name, last_name, password=None):
             """Creates a new user profile object"""
 
             #when no email or invalid
@@ -15,7 +15,7 @@ class UserProfileManager(BaseUserManager):
 
             #normalize converts all into lowercase
             email = self.normalize_email(email)
-            user = self.model(email=email, name=name)
+            user = self.model(email=email, first_name=first_name, last_name=last_name)
 
             #it will encrypt password
             user.set_password(password)
@@ -41,7 +41,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Represent a "user profile" inside our system"""
 
     email = models.EmailField(max_length=255, unique=True) #unique means one and only one
-    name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True) #needed for substition later
     is_staff = models.BooleanField(default=False) #needed for substition later
 
@@ -49,18 +50,18 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['first_name','last_name']
 
     #will be used later on with the django admin
     def get_full_name(self):                        #possible to make this into a get_first_name and get_last_name
         """Used to get a users full name"""
 
-        return self.name
+        return self.first_name
 
     def get_short_name(self):                       #possible to make this into  a get_first_name or get_last_name
         """Used to get a users short name"""
 
-        return self.name
+        return self.first_name
 
     def __str__(self):
         """Django uses this when it needs to convert the object to a string"""

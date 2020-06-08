@@ -44,8 +44,8 @@ class HelloApiView(APIView):
         serializer = serializers.HelloSerializer(data=request.data)
 
         if serializer.is_valid():
-            name = serializer.data.get('name')
-            message = 'Hello {0}'.format(name) #in accordance to list numbering indexx 0, 1, 2...
+            first_name = serializer.data.get('first_name')
+            message = 'Hello {0}'.format(first_name) #in accordance to list numbering indexx 0, 1, 2...
             return Response({'message': message})
         else:
             return Response(
@@ -92,8 +92,8 @@ class HelloViewSet(viewsets.ViewSet):
         serializer = serializers.HelloSerializer(data=request.data)
 
         if serializer.is_valid():
-            name = serializer.data.get('name')
-            message = 'Hello {0}'.format(name) #in accordance to list numbering indexx 0, 1, 2...
+            first_name = serializer.data.get('first_name')
+            message = 'Hello {0}'.format(first_name) #in accordance to list numbering indexx 0, 1, 2...
             return Response({'message': message})
         else:
             return Response(
@@ -127,7 +127,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,) # having coma to ensure that it is a tuple
     permission_classes = (permissions.UpdateOwnProfile,) # add multi auth classes to a particular viewset
     filter_backends = (filters.SearchFilter,) # allow user to use the search filter backend
-    search_fields = ('name', 'email',) # by using the name and email to filter
+    search_fields = ('first_name', 'email',) # by using the name and email to filter
 
 class LoginViewSet(viewsets.ViewSet):
     """Check email and password and return an auth token."""
