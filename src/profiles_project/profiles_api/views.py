@@ -165,3 +165,20 @@ class EventProfileViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user."""
 
         serializer.save(user_profile = self.request.user)
+
+    def put(self, request, pk=None):
+        """Handles updating an object."""
+
+        return Response({'method': 'put'})
+
+    def patch(self, request, pk=None):
+        """Patch request, only updates fields provided in the request."""
+
+        #logic to perform action here
+
+        return Response({'method': 'patch'})
+
+    def delete(self, request, pk=None):
+        """Deletes an object."""
+
+        return Response({'method': 'delete'})
