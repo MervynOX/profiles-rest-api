@@ -39,7 +39,8 @@ class ProfileFeedItemSerializer(serializers.ModelSerializer):
         fields = ('id', 'user_profile', 'status_text', 'created_on')
         extra_kwargs = {'user_profile': {'read_only': True}} # create profile feed item for the currently logged in user
 
-class EventProfileSerializer(serializers.ModelSerializer):
+
+class EventCreationSerializer(serializers.ModelSerializer):
     """A serializer for event profiles"""
 
     class Meta:

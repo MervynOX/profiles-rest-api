@@ -11,6 +11,7 @@ router.register('profile', views.UserProfileViewSet) # because it is a model vie
 router.register('login', views.LoginViewSet, base_name='login')
 router.register('feed', views.UserProfileFeedViewSet)
 router.register('events', views.EventProfileViewSet)
+router.register('eventcreate',views.EventCreationViewSet,base_name="eventcreate")
 
 urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),
