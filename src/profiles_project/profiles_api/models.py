@@ -82,3 +82,41 @@ class ProfileFeedItem(models.Model):
         """Return the model as a string."""
 
         return self.status_text
+
+class EventProfile(models.Model):
+    """Represent a "event profile" inside our system"""
+
+    title = models.CharField(max_length=255, null=False, blank=False ) #unique means one and only one
+    location = models.CharField(max_length=255, null=False, blank=False )
+    about = models.TextField(max_length=5000, null=False, blank=False)
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
+    date_time = models.DateTimeField() #needed for substition later
+
+
+    #object manager to manage user profile *needed for substition later
+#    objects = EventProfileManager()
+
+    #will be used later on with the django admin
+    def __str__(self):                        #possible to make this into a get_first_name and get_last_name
+
+        return self.title
+
+'''class EventProfileManager(models.Model):
+    """Helps Django work with our custom user model"""
+
+    def create_event(self, title, location, about, organiser_id,date_time):
+            """Creates a new event profile object"""
+
+            #when no email or invalid
+            if not title:
+                raise ValueError('Events must have a title.')
+
+            #normalize converts all into lowercase
+            event = self.model(title=title, location=location, about=about, organiser_id=organiser_id , date_time=date_time)
+
+            event.organiser_id=
+
+            return user
+
+
+'''
