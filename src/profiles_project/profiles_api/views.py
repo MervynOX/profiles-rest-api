@@ -156,17 +156,16 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
 class EventProfileViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating events."""
 
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = serializers.EventCreationSerializer
+    #serializer_class = serializers.EventCreationSerializer
+    serializer_class=serializers.EventCreationSerializer
     queryset = models.EventProfile.objects.all()
-    permission_classes = (permissions.PostOwnStatus, IsAuthenticated) # IsAuthenticatedOrReadOnly means user who are not logged in can also view it
 
 
 
 class EventCreationViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating events."""
 
-    authentication_classes = (TokenAuthentication,)
+    #authentication_classes = (TokenAuthentication,)
     queryset = ''
     serializer_class = serializers.EventCreationSerializer
     permission_classes = (permissions.PostOwnStatus, IsAuthenticated) # IsAuthenticatedOrReadOnly means user who are not logged in can also view it
