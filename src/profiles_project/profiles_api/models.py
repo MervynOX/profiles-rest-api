@@ -3,6 +3,11 @@ from django.contrib.auth.models import AbstractBaseUser #import it so we can lat
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+
 class UserProfileManager(BaseUserManager):
     """Helps Django work with our custom user model"""
 
@@ -24,10 +29,10 @@ class UserProfileManager(BaseUserManager):
             return user
 
     #admin
-    def create_superuser(self, email, name, password):
+    def create_superuser(self, email, first_name, last_name, password):
         """Creates and saves a new superuser with given details"""
 
-        user = self.create_user(email, name, password)
+        user = self.create_user(email, first_name, last_name, password)
 
         user.is_superuser = True
         user.is_staff = True
@@ -103,20 +108,20 @@ class EventProfile(models.Model):
 
 '''class EventProfileManager(models.Model):
     """Helps Django work with our custom user model"""
-
     def create_event(self, title, location, about, organiser_id,date_time):
             """Creates a new event profile object"""
-
             #when no email or invalid
             if not title:
                 raise ValueError('Events must have a title.')
-
             #normalize converts all into lowercase
             event = self.model(title=title, location=location, about=about, organiser_id=organiser_id , date_time=date_time)
-
             event.organiser_id=
-
             return user
+'''
 
-
+'''
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 '''
