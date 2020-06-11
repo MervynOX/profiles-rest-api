@@ -169,7 +169,7 @@ class EventCreationViewSet(viewsets.ModelViewSet):
     queryset = ''
     serializer_class = serializers.EventCreationSerializer
 
-    '''def perform_create(self, serializer):
+    def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""
 
-        serializer.save(user_profile = self.request.user)'''
+        serializer.save(user_profile = self.request.user)
