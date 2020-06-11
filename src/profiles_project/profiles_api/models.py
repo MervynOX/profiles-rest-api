@@ -89,9 +89,9 @@ class EventProfile(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False ) #unique means one and only one
     location = models.CharField(max_length=255, null=False, blank=False )
     about = models.TextField(max_length=5000, null=False, blank=False)
-    #user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
     date_time = models.DateTimeField() #needed for substition later
-    user_profile = 1
+
 
 
     #object manager to manage user profile *needed for substition later
