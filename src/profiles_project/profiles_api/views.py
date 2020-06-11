@@ -165,7 +165,7 @@ class EventProfileViewSet(viewsets.ModelViewSet):
 class EventCreationViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating events."""
 
-    #authentication_classes = (TokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
     queryset = ''
     serializer_class = serializers.EventCreationSerializer
 
