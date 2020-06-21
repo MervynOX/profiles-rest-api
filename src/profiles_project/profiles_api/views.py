@@ -160,14 +160,13 @@ class EventProfileViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.EventCreationSerializer
     queryset = models.EventProfile.objects.all()
 
-
-
 class EventCreationViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating events."""
 
-    authentication_classes = (TokenAuthentication,)
+    #authentication_classes = (TokenAuthentication,)
     queryset = ''
     serializer_class = serializers.EventCreationSerializer
+    permission_classes = (permissions.PostOwnStatus, IsAuthenticated) # IsAuthenticatedOrReadOnly means user who are not logged in can also view it
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""

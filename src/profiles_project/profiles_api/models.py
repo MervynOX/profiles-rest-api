@@ -97,14 +97,7 @@ class EventProfile(models.Model):
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
     date_time = models.DateTimeField() #needed for substition later
 
-
-
-    #object manager to manage user profile *needed for substition later
-#    objects = EventProfileManager()
-
-    #will be used later on with the django admin
-    def __str__(self):                        #possible to make this into a get_first_name and get_last_name
-
+    def __str__(self):
         return self.title
 
 '''class EventProfileManager(models.Model):
