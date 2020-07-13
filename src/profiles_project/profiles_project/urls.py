@@ -17,7 +17,10 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
 
+from django.views.static import serve
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('profiles_api.urls')) #anything with api/... will be match and pass through profiles.api.urls
+
 ]
