@@ -172,3 +172,22 @@ class EventCreationViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user."""
 
         serializer.save(user_profile = self.request.user)
+
+class CommunityViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating community."""
+
+    serializer_class=serializers.CommunityCreationSerializer
+    queryset = models.CommunityProfile.objects.all()
+
+class CommunityCreationViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating community."""
+
+    #authentication_classes = (TokenAuthentication,)
+    queryset = ''
+    serializer_class = serializers.CommunityCreationSerializer
+    permission_classes = (permissions.PostOwnStatus, IsAuthenticated) # IsAuthenticatedOrReadOnly means user who are not logged in can also view it
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user."""
+
+        serializer.save(user_profile = self.request.user)

@@ -100,6 +100,16 @@ class EventProfile(models.Model):
     def __str__(self):
         return self.title
 
+class CommunityProfile(models.Model):
+    """Represent a "community profile" inside our system"""
+
+    community_name = models.CharField(max_length=255, null=False, blank=False )
+    description = models.TextField(max_length=5000, null=False, blank=False)
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
+
+    def __str__(self):
+        return self.community_name
+
 '''class EventProfileManager(models.Model):
     """Helps Django work with our custom user model"""
     def create_event(self, title, location, about, organiser_id,date_time):
