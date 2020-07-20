@@ -19,4 +19,4 @@ urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),
     #router object will create the url for us, but checking if any of the url matches the condition first
     url(r'', include(router.urls))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 

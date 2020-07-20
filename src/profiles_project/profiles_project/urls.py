@@ -25,4 +25,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('profiles_api.urls')) #anything with api/... will be match and pass through profiles.api.urls
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser #import it so we can later substitue it woth our very own custom model
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+
 
 class UserProfileManager(BaseUserManager):
     """Helps Django work with our custom user model"""
@@ -24,12 +26,25 @@ class UserProfileManager(BaseUserManager):
             return user
 
     #admin
-    def create_superuser(self, email, name, password):
+    def create_superuser(self, email, first_name,last_name, password):
         """Creates and saves a new superuser with given details"""
+
+        user = self.create_user(email, first_name, last_name, password)
+
+        user.is_superuser = True
+        user.is_admin = True
+        user.is_staff = True
+
+        user.save(using=self._db)
+
+        return user
+
+    def create_adminuser(self, email, name, password):
+        """Creates and saves a new admin with given details"""
 
         user = self.create_user(email, name, password)
 
-        user.is_superuser = True
+        user.is_admin = True
         user.is_staff = True
 
         user.save(using=self._db)
@@ -91,7 +106,7 @@ class EventProfile(models.Model):
     about = models.TextField(max_length=5000, null=False, blank=False)
     #user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
     date_time = models.DateTimeField() #needed for substition later
-
+    user_profile = models.ForeignKey('UserProfile',on_delete=models.CASCADE)
 
 
     #object manager to manage user profile *needed for substition later
