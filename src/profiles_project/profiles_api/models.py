@@ -46,7 +46,7 @@ class UserProfileManager(BaseUserManager):
 
         user = self.create_user(email, first_name, last_name, password)
 
-        
+
         user.is_admin = True
         user.is_staff = True
 
@@ -109,6 +109,7 @@ class EventProfile(models.Model):
     about = models.TextField(max_length=5000, null=False, blank=False)
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
     date_time = models.DateTimeField() #needed for substition later
+    
 
     def __str__(self):
         return self.title
