@@ -109,10 +109,21 @@ class EventProfile(models.Model):
     about = models.TextField(max_length=5000, null=False, blank=False)
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE) #needed for substition later
     date_time = models.DateTimeField() #needed for substition later
-    
+
 
     def __str__(self):
         return self.title
+
+'''class UserEventListProfile(models.Model):
+    """Represent a "user event list profile " inside our system"""
+
+    user_profile = models.ForeignKey('UserProfile',related_name="UserProfile", on_delete=models.CASCADE) #needed for substition later
+    event_profile = models.ForeignKey('EventProfile',related_name="EventProfile", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user_profile
+'''
+
 
 class CommunityProfile(models.Model):
     """Represent a "community profile" inside our system"""

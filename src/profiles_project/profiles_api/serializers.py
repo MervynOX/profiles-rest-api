@@ -48,6 +48,7 @@ class EventCreationSerializer(serializers.ModelSerializer):
         fields = ('id','user_profile', 'title', 'location', 'about', 'date_time')
         extra_kwargs= {'user_profile': {'read_only': True}}
 
+
 class CommunityCreationSerializer(serializers.ModelSerializer):
     """A serializer for event profiles"""
 
