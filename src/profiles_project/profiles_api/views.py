@@ -11,6 +11,7 @@ from rest_framework import filters
 #for login API
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 #for profile feed API
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated              # only allowed register and logged in user to view it
@@ -98,8 +99,9 @@ class HelloViewSet(viewsets.ViewSet):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                
     # pk means primary key, to identify the object
-    def retrieve(self, reuqest, pk=None):
+    def retrieve(self, request, pk=None):
         """Handles getting an object by its ID"""
 
         return Response({'http_method': 'GET'})
