@@ -173,10 +173,10 @@ class EventProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = (permissions.UpdateOwnEvent, IsAuthenticated)
 
 
-    def perform_create(self, serializer):
+    '''def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""
 
-        serializer.save(user_profile = self.request.user)
+        serializer.save(user_profile = self.request.user)'''
 
 
 class EventCreationViewSet(viewsets.ModelViewSet):
