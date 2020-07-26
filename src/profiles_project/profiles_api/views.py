@@ -99,7 +99,7 @@ class HelloViewSet(viewsets.ViewSet):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-                
+
     # pk means primary key, to identify the object
     def retrieve(self, request, pk=None):
         """Handles getting an object by its ID"""
@@ -131,6 +131,14 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,) # allow user to use the search filter backend
     search_fields = ('first_name', 'email',) # by using the name and email to filter
 
+class CustomObtainAuthToken(ObtainAuthToken):
+    '''custom ObtainAuthToken to receive token and id'''
+
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'id': token.user_id})
+
 class LoginViewSet(viewsets.ViewSet):
     """Check email and password and return an auth token."""
 
@@ -140,7 +148,7 @@ class LoginViewSet(viewsets.ViewSet):
     def create(self, request):
         """Use the ObtainAuthToken APIView to validate and create a token."""
 
-        return ObtainAuthToken().post(request)
+        return CustomObtainAuthToken().post(request) #using CustomObtainAuthToken instaed of ObtainAuthToken(default)
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
